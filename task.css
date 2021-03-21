@@ -33,26 +33,55 @@ body{
 input:active, input:focus{
   outline:none;
 }
-input {
+form input {
  width: 45%;
  height: 40px;
  border-radius: 5px;
  margin: 0 auto 3% auto;
  transition: 0.3s ease;
 }
-input[type='text']{
+form input[type='text']{
   float:left;
   border:1px solid lightGray;
 }
-input[type='submit']{
+form input[type='submit']{
   float:right;
   background:#FF495F;
   color:white;
   font-size: 18px;
   border:1px solid FireBrick;
 }
-input[type='text']:hover, input[type='text']:focus {
+form input[type='text']:hover, input[type='text']:focus {
  border: 1px solid rgb(162, 228, 7);
+}
+.radio{
+ width:auto;
+ margin:auto;
+ padding-top: 3%;
+}
+input[type='checkbox']{
+  position:relative; 
+  width:0px;
+  height:0px;
+ /* -webkit-appearance: none;
+  appearance: none;*/
+}
+
+input[type='checkbox']::before{
+ position:absolute;
+ top:-12px;
+ left: -10px;
+ content:'';
+ display:block;
+ background:white;
+ width:11px;
+ height:11px;
+ border-radius:100px;
+ border:1px solid red;
+}
+input[type='checkbox']:checked::before{
+background:red;
+box-shadow: inset 0 0 0 2px white;
 }
 .active:hover {
  transform:scale(0.9);

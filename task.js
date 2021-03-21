@@ -54,13 +54,24 @@ window.addEventListener('DOMContentLoaded',()=>{
         document.querySelector('input[type="submit"]').classList.remove('active');   
     },
     setReadOnly: function(){
-      let inputs = document.querySelectorAll('input');
-      let closes = document.querySelectorAll('li span');
+      let inputs = document.querySelectorAll('form input');
+      
+      const radioBtn = document.querySelector('input[type="checkbox"]');
+      
+      radioBtn.addEventListener('click', ()=>{
+        let closes = document.querySelectorAll('li span');
 
-      document.querySelector('input[type="submit"]').classList.remove('active');
+        document.querySelector('input[type="submit"]').classList.toggle('active');
+        closes.forEach((i) => i.classList.toggle('block'));
 
-      inputs.forEach(tag => tag.setAttribute('readonly', 'true'));
-      closes.forEach((i) => i.classList.add('block'));
+        if(radioBtn.checked){
+          inputs.forEach(tag => tag.setAttribute('readonly', 'true'));
+          
+        } else {
+          inputs.forEach(tag => tag.removeAttribute('readonly'));
+          
+        }
+      }) 
     } 
   }
 
@@ -114,6 +125,7 @@ window.addEventListener('DOMContentLoaded',()=>{
  }
  refreshArr ();
 
+
 //Get tags ----->
 //console.log( obj.allTags);
 
@@ -146,6 +158,6 @@ window.addEventListener('DOMContentLoaded',()=>{
 */
 
 // block all events in UI
-//obj.setReadOnly();
+obj.setReadOnly();
 
 })

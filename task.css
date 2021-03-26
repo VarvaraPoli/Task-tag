@@ -10,7 +10,7 @@ body{
  width: 500px;
  height:auto;
  background: rgb(230, 230, 230);
- padding: 3%;
+ padding: 30px;
  display:flex;
  flex-direction: column;
  justify-content:space-between;

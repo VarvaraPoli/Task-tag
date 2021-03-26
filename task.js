@@ -1,26 +1,29 @@
 'use strict';
 window.addEventListener('DOMContentLoaded',()=>{
  // let container = document.querySelector('.container');
-  const  form = document.querySelector('form'),
-         button = form.querySelector('input[type="submit"]'),
-         text = form.querySelector('input[type="text"]'),
-         tagsArea = document.querySelector('.tagsArea');     
+  const  formTags = document.querySelector('form'),
+         btn = formTags.querySelector('input[type="submit"]'),
+         textInput = formTags.querySelector('input[type="text"]'),
+         tagsArea = document.querySelector('.tagsArea'),
+		 radioBtn = document.querySelector('input[type="checkbox"]');
 
-  document.querySelector('input[type="submit"]').classList.add('active');       
+  btn.classList.add('active');       
 
   alert('You can enter no more than 55 letters!');
 
-  text.oninput = () => {
-      if(text.value.length > 45) {
-       text.value = `${text.value.slice(0,45)}...`;
+  textInput.oninput = () => {
+      if(textInput.value.length > 45) {
+       textInput.value = `${textInput.value.slice(0,45)}...`;
         alert('Too long');
       }
     }
   
 
-  form.addEventListener('submit', (e)=>{
+  formTags.addEventListener('submit', (e)=>{
     e.preventDefault();
-    createTags(text.value);
+	if(btn.classList.contains('active')){	
+      createTags(textInput.value);
+	}
   })
   
   
@@ -51,12 +54,9 @@ window.addEventListener('DOMContentLoaded',()=>{
     },
     set readOnly(tag){
         tag.setAttribute('readonly', 'true');
-        document.querySelector('input[type="submit"]').classList.remove('active');   
+        btn.classList.remove('active');   
     },
-    setReadOnly: function(){
-      let inputs = document.querySelectorAll('form input');
-      
-      const radioBtn = document.querySelector('input[type="checkbox"]');
+    setReadOnly: function(){  
       
       radioBtn.addEventListener('click', ()=>{
         let closes = document.querySelectorAll('li span');
@@ -65,11 +65,9 @@ window.addEventListener('DOMContentLoaded',()=>{
         closes.forEach((i) => i.classList.toggle('block'));
 
         if(radioBtn.checked){
-          inputs.forEach(tag => tag.setAttribute('readonly', 'true'));
-          
+          textInput.setAttribute('readonly', 'true');
         } else {
-          inputs.forEach(tag => tag.removeAttribute('readonly'));
-          
+          textInput.removeAttribute('readonly');
         }
       }) 
     } 
@@ -81,7 +79,7 @@ window.addEventListener('DOMContentLoaded',()=>{
       newTag.innerHTML = `${value}<span>x</span>`;
       tagsArea.prepend(newTag);
     
-      form.reset();
+      formTags.reset();
       deleteTag();
       refreshArr();
     }
@@ -91,7 +89,7 @@ window.addEventListener('DOMContentLoaded',()=>{
     let tags = tagsArea.querySelectorAll('li');
     
     tags.forEach((item) => {
-      let close = item.querySelector('span');
+      let closeTag = item.querySelector('span');
 
        if( removedTag && item.textContent.slice(0,-1) == removedTag ){
         item.remove(); 
@@ -99,8 +97,8 @@ window.addEventListener('DOMContentLoaded',()=>{
          console.log(obj.arrTags);
        }
 
-       close.addEventListener('click', ()=>{
-        if(!close.classList.contains('block')){
+       closeTag.addEventListener('click', ()=>{
+        if(!closeTag.classList.contains('block')){
           item.remove(); 
           refreshArr();
           console.log(obj.arrTags);
@@ -141,8 +139,7 @@ window.addEventListener('DOMContentLoaded',()=>{
 //console.log( obj.removeTag = obj.arrTags[0] );
 
 //set readonly ----->
-//let inputText = document.querySelector('input[type="text"]');
-//obj.readOnly = inputText;
+//obj.readOnly = textInput;
 
 //localStorage  1  ----->
   obj.arrTags.forEach((item,i) => {

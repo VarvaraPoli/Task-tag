@@ -13,4 +13,4 @@ create readonly mode when the ability to change tags is blocked
 change this readonly state,
 checkbox for displaying and changing this state all these changes are applied without reloading the page.
 
-Done without frameworks and libraries.
+Done without frameworks and libraries after passing the basics of js training on the Udemy.com.
